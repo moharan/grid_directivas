@@ -1,44 +1,39 @@
 *{
-	font-family:$body_font;
+	/*basicos de nuestra grilla*/
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
-.navbar-nav{
-	li:hover{
-		background-color:$background_uno;
-		a:hover{
-			color:$color_text_titulo;
-		}
+.container {
+	/*contenedor*/
+	width: 100%;
+	max-width: 1200px;
+	margin: 0px auto;
+}
+.templateRow{
+	/*row*/
+	content: " ";
+	display: table;
+}
+.row{
+	&:before{
+		@extend .templateRow;
+	}
+	&:after{
+		@extend .templateRow;
+		clear: both;
 	}
 }
-.seccion_uno{
-	background-color:$background_uno;
-	padding-top:$padding;
-	h1, h3{
-		color:$color_text_titulo;
-		text-align:$text_center;
-	}
+[class*="col-"]{
+	min-height: 7px;
+	padding: 12px;
+	float: left;
 }
-.seccion_dos{
-	background-color:$background_dos;
-	padding:$padding_footer;
-	@include excel();
+@function anchoDeColumnas($i){
+	@return percentage(($i/12));
 }
-.seccion_tres{
-	background-color:$background_dos;
-	padding:$padding_footer;
-	.desktop{
-		width:$width_desktop;
-		padding:$padding;
-	}
-	h1, h2, h4{
-		text-align:$text_center;
-	}
-	p{
-		@include excel();
-	}
-}
-@media (max-width: 600px) {
-	.seccion_uno{
-		background-color:$background_uno;
-		padding-top:$padding_media;
+@for $i from 1 through 12{
+	.col-#{$i}{
+		width: anchoDeColumnas($i);
 	}
 }
